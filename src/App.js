@@ -8,7 +8,9 @@ import AuthService from "./services/auth.service";
 import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
+import ViewLoans from "./components/view-loans.component";
 import Profile from "./components/profile.component";
+import Loan from "./components/loan.component";
 // import BoardUser from "./components/board-user.component";
 // import BoardModerator from "./components/board-moderator.component";
 // import BoardAdmin from "./components/board-admin.component";
@@ -23,8 +25,7 @@ class App extends Component {
     this.logOut = this.logOut.bind(this);
 
     this.state = {
-      showModeratorBoard: false,
-      showAdminBoard: false,
+      
       currentUser: undefined,
     };
   }
@@ -55,7 +56,7 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+    const { currentUser} = this.state;
     document.title = "Welcome to SumBank";
     return (
       <div>
@@ -70,22 +71,14 @@ class App extends Component {
               </Link>
             </li>
 
-            {showModeratorBoard && (
+
+            {currentUser && (
               <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
-                  Moderator Board
+                <Link to={"/loans"} className="nav-link">
+                  Show Loans
                 </Link>
               </li>
             )}
-
-            {showAdminBoard && (
-              <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Board
-                </Link>
-              </li>
-            )}
-
             {currentUser && (
               <li className="nav-item">
                 <Link to={"/add"} className="nav-link">
@@ -124,17 +117,21 @@ class App extends Component {
             </div>
           )}
         </nav>
+        {currentUser?
+        (<h4 >&ensp;&ensp;Welcome {currentUser.name}!</h4>)
+        :(<h4>&ensp;&ensp;Please login to access the portal</h4>)}
 
         <div className="container mt-3">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/loans" element={<ViewLoans />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/add" element={<AddLoan />} />
-            {/* <Route path="/mod" element={<BoardModerator />} />
-            <Route path="/admin" element={<BoardAdmin />} /> */}
+            <Route path="/loans/:id" element={<Loan/>} />
+            
           </Routes>
         </div>
 

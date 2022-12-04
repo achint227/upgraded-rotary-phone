@@ -25,28 +25,28 @@ export default class AddLoan extends Component {
 
     onChangeLoanType(e) {
         this.setState({
-            title: e.target.value
+            loanType: e.target.value
         });
     }
     onChangeLoanNumber(e) {
         this.setState({
-            title: e.target.value
+            loanNumber: e.target.value
         });
     }
     onChangeAmount(e) {
         this.setState({
-            title: e.target.value
+            amount: e.target.value
         });
     }
     onChangeInterest(e) {
         this.setState({
-            title: e.target.value
+            interest: e.target.value
         });
     }
 
     onChangeLoanTermYears(e) {
         this.setState({
-            description: e.target.value
+            loanTermYears: e.target.value
         });
     }
 
@@ -108,7 +108,7 @@ export default class AddLoan extends Component {
                                 id="loanType"
                                 required
                                 value={this.state.loanType}
-                                onChange={this.onLoanType}
+                                onChange={this.onChangeLoanType}
                                 name="loanType"
                             />
                         </div>
